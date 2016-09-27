@@ -12,6 +12,10 @@ module.exports = function(grunt) {
 			css: {
 				files: '**/*.scss',
 				tasks: ['sass', 'autoprefixer']
+			},
+			js: {
+				files: '**/*.js',
+				tasks: ['concat']
 			}
 		},
 		autoprefixer: {
@@ -24,10 +28,20 @@ module.exports = function(grunt) {
         src: 'public/css/*.css',
         dest: 'public/css/'
 	    }
+	  },
+		concat: {
+	    options: {
+	      separator: ';',
+	    },
+	    dist: {
+	      src: ['js/*.js'],
+	      dest: 'public/js/app.js',
+	    },
 	  }
 	});
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-autoprefixer');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.registerTask('default',['watch']);
 };

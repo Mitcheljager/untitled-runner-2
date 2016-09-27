@@ -1,4 +1,4 @@
-var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, tileSets;
+var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, tileSets, firstTileSet, lastTileSet;
 
 $(function() {
   $.getJSON("/js/level.json", function(json){
@@ -111,6 +111,23 @@ function movePlayer(newPlayerPos, newPosY, newPosX) {
 function createMap() {
   var tileIndex = 0;
 
+  firstTileSet = tileSets[0];
+  lastTileSet = tileSets[tileSets.length-1];
+
+  console.log(lastTileSet);
+
+  tileSets.shift();
+  tileSets.splice(-1,1);
+
+  tileSets = shuffleArray(tileSets);
+
+  firstTileSet.tiles.map(function(tile) {
+    tileIndex++;
+    console.log('tileIndex: ' + tileIndex);
+
+    $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+  });
+
   tileSets.map(function(tileArray) {
     tileArray = tileArray.tiles;
 
@@ -137,6 +154,16 @@ function createMap() {
       }
     });
   });
+
+  lastTileSet.tiles.map(function(tile) {
+    tileIndex++;
+    console.log('tileIndex: ' + tileIndex);
+
+    $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+  });
+
+  tileSets.unshift(firstTileSet);
+  tileSets.push(lastTileSet);
 }
 
 function changeHealthPool(healthChange, healthAlert = 'You Died.') {
@@ -167,28 +194,8 @@ function attackMain() {
       tileIndex++;
 
       if (tile.entity == 'chest') {
-
-        if (playerOrientation == 'up') {
-          if (tileIndex == playerPos - 9) {
-            openChest(tileIndex);
-            tile.entity = 0;
-            tile.interaction = 1;
-          }
-        } else if (playerOrientation == 'right') {
-          if (tileIndex == playerPos + 1) {
-            openChest(tileIndex);
-            tile.entity = 0;
-            tile.interaction = 1;
-          }
-        } else if (playerOrientation == 'down') {
-          if (tileIndex == playerPos + 9) {
-            openChest(tileIndex);
-            tile.entity = 0;
-            tile.interaction = 1;
-          }
-        } else if (playerOrientation == 'left') {
-          if (tileIndex == playerPos - 1) {
-            openChest(tileIndex);
+        if (tileIndex == playerPos - 9) {
+          if (openChest(tileIndex)) {
             tile.entity = 0;
             tile.interaction = 1;
           }
@@ -251,8 +258,10 @@ function openChest(tileId) {
     alertBlock('You opened a chest.');
     $('.entity--'+ tileId).remove();
     $('.inventory .inventory-item').remove();
+    return true;
   } else {
     alertBlock('You need a key to open the chest.');
+    return false;
   }
 }
 
