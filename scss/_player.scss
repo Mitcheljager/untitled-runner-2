@@ -1,0 +1,62 @@
+.player {
+  background-image: url('/img/sprite.png');
+  background-position: -96px 0;
+  width: 32px;
+  height: 32px;
+  left: 128px;
+  bottom: 268px;
+  position: absolute;
+  z-index: 10;
+
+  &--look-left {
+    background-position: -64px 0;
+  }
+
+  &--look-right {
+    background-position: 0 0;
+  }
+
+  &--look-down {
+    background-position: -96px 0;
+  }
+
+  &--look-up {
+    background-position: -32px 0;
+  }
+
+  &--falling {
+    transition: transform 2000ms;
+    transform: scale(0) rotate(240deg);
+  }
+}
+
+.attack {
+  height: 32px;
+  width: 32px;
+  background-image: url('/img/attack.png');
+  opacity: 0;
+
+  &--down {
+    opacity: 1;
+    transform: translateY(32px);
+    background-position: -96px 0;
+  }
+
+  &--right {
+    opacity: 1;
+    transform: translateX(32px);
+    background-position: 0 0;
+  }
+
+  &--left {
+    opacity: 1;
+    transform: translateX(-32px);
+    background-position: -32px 0;
+  }
+
+  &--up {
+    opacity: 1;
+    transform: translateY(-32px);
+    background-position: -64px 0;
+  }
+}

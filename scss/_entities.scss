@@ -1,0 +1,57 @@
+.entities {
+  position: absolute;
+}
+
+.entity {
+  position: absolute;
+  color: red;
+  height: 32px;
+  width: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.entity--mob {
+}
+
+.entity--key {
+  background-image: url('/img/tileset3.png');
+  background-position: -32px -160px;
+  color: transparent;
+}
+
+@keyframes entity--torch {
+  0% {
+    background-position: -128px -128px;
+  } 10% {
+    background-position: -160px -128px;
+  } 20% {
+    background-position: -192px -128px;
+  } 30% {
+    background-position: -224px -128px;
+  } 40% {
+    background-position: -96px -128px;
+  }
+}
+
+.entity--torch {
+  top: 16px;
+  background-image: url('/img/tileset3.png');
+  background-position: -96px -128px;
+  animation: entity--torch 2000ms steps(1) infinite;
+  color: transparent;
+}
+
+.entity--torch-light {
+  background-image: url('/img/tileset3.png');
+  background-position: -64px -128px;
+  color: transparent;
+}
+
+.entity--chest {
+  background-image: url('/img/tileset3.png');
+  background-position: -64px -160px;
+  color: transparent;
+  top: 4px;
+}

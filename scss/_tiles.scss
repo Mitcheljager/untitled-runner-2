@@ -1,0 +1,162 @@
+.tiles {
+  transition: transform 100ms;
+  position: absolute;
+  bottom: 200px;
+}
+
+.tile {
+  width: 32px;
+  height: 32px;
+  float: left;
+  margin: 0;
+  background-image: url('/img/tileset3.png');
+  background-position: -96px 0;
+}
+
+.tile--trap {
+  background-position: -0px -160px;
+}
+
+.tile--none {
+  background-image: none;
+  background-position: left top;
+}
+
+.tile--floor-2 {
+  background-position: 0 -192px;
+}
+
+.tile--wall {
+  background-position: -64px 0;
+}
+
+.tile--wall-top {
+  background-position: -64px 0;
+}
+
+.tile--wall-top-left {
+  background-position: -32px -64px;
+}
+
+.tile--wall-top-right {
+  background-position: -480px -64px;
+}
+
+.tile--wall-left {
+  background-position: -224px -96px;
+}
+
+.tile--wall-bottom-left {
+  background-position: -32px -128px;
+}
+
+.tile--wall-bottom-right {
+  background-position: 0 -128px;
+}
+
+.tile--wall-right {
+  background-position: -192px -96px;
+}
+
+.tile--wall-bottom {
+  background-position: -128px -96px;
+}
+
+.tile--wall-top-top {
+  background-position: -32px 0;
+}
+
+@keyframes tile--wall-top-top-2 {
+  0% {
+    background-position: 0 -128px;
+  } 33% {
+    background-position: -32px -128px;
+  } 66% {
+    background-position: -64px -128px;
+  }
+}
+
+.tile--wall-top-top-2 {
+  background-position: 0 -128px;
+  animation: tile--wall-top-top-2 300ms steps(1) infinite;
+}
+
+.tile--wall-top-top-right {
+  background-position: -480px -32px;
+}
+
+.tile--wall-top-top-left {
+  background-position: -32px -32px;
+}
+
+.tile--wall-top-corner-right {
+  background-position: -176px -64px;
+}
+
+.tile--wall-top-corner-left {
+  background-position: -176px -64px;
+}
+
+.tile--wall-top-left-corner {
+  background-position: -32px -96px;
+}
+
+.tile--wall-top-top-left-corner {
+  background-position: 0 -96px;
+}
+
+.tile--wall-top-top-right-corner {
+  background-position: -192px -192px;
+}
+
+.tile--wall-top-right-corner {
+  background-position: -224px -192px;
+}
+
+.tile--floor-left {
+  background-position: -192px 0;
+}
+
+.tile--floor-right {
+  background-position: -32px -192px;
+}
+
+.tile--floor-corner-left {
+  background-position: -384px -96px;
+}
+
+.tile--floor-corner-right {
+  background-position: -416px -96px;
+}
+
+.tile--bottom-corner-right {
+  background-position: -96px -96px;
+}
+
+.tile--bottom-corner-left {
+  background-position: -64px -96px;
+}
+
+.tile--hole-top {
+  background-position: -32px -32px;
+}
+
+.tile--hole-top-left {
+  background-position: 0 -32px;
+}
+
+.tile--hole-top-right {
+  background-position: -64px -32px;
+}
+
+.tile--hole-bottom {
+  background-position: -224px -32px;
+}
+
+.tile--hole-bottom-left {
+  background-position: 0 -64px;
+}
+
+.tile--hole-bottom-right {
+  background-position: -192px -32px;
+}
