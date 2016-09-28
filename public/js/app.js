@@ -37,18 +37,62 @@ function openChest(tileId) {
         if (playerOrientation == 'up') {
           if (tileIndex == playerPos - 9) {
             showHitMarker();
+
+            var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
+
+            if (damageCurrentMob(tileIndex) == true) {
+              tile.interaction = 1;
+              tile.entity = 0;
+
+              targetEntityElement.remove();
+            } else {
+              mobHurtVisual(targetEntityElement);
+            }
           }
         } else if (playerOrientation == 'right') {
           if (tileIndex == playerPos + 1) {
             showHitMarker();
+
+            var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
+
+            if (damageCurrentMob(tileIndex) == true) {
+              tile.interaction = 1;
+              tile.entity = 0;
+
+              targetEntityElement.remove();
+            } else {
+              mobHurtVisual(targetEntityElement);
+            }
           }
         } else if (playerOrientation == 'down') {
           if (tileIndex == playerPos + 9) {
             showHitMarker();
+
+            var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
+
+            if (damageCurrentMob(tileIndex) == true) {
+              tile.interaction = 1;
+              tile.entity = 0;
+
+              targetEntityElement.remove();
+            } else {
+              mobHurtVisual(targetEntityElement);
+            }
           }
         } else if (playerOrientation == 'left') {
           if (tileIndex == playerPos - 1) {
             showHitMarker();
+
+            var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
+
+            if (damageCurrentMob(tileIndex) == true) {
+              tile.interaction = 1;
+              tile.entity = 0;
+
+              targetEntityElement.remove();
+            } else {
+              mobHurtVisual(targetEntityElement);
+            }
           }
         }
       }
@@ -63,6 +107,39 @@ function showAttack(direction) {
     $('.attack').removeClass('attack--'+ direction +'');
   }, 200);
 }
+;function damageCurrentMob(entityId) {
+
+  var mobDeath = false;
+
+  mobMap.map(function(mob) {
+
+    if (mob.id == entityId) {
+      if (checkMobHealth(mob.health) == true) {
+        mob.health = mob.health - 25;
+      } else {
+        mobDeath = true;
+      }
+    }
+  });
+
+  return mobDeath;
+}
+
+function checkMobHealth(health) {
+  if (health > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function mobHurtVisual(element) {
+  element.addClass('entity--hurting');
+
+  setTimeout(function() {
+    element.removeClass('entity--hurting');
+  }, 300);
+}
 ;function entityCheck(entityType, tileId) {
   if (entityType != 0) {
 
@@ -74,10 +151,12 @@ function showAttack(direction) {
     var entityPosYPx = entityPosY * 32;
     var entityPosXPx = entityPosX * 32;
 
-    console.log('EntityPosY: ' + entityPosY);
-    console.log('EntityPosX: ' + entityPosX);
+    if (entityType == 'mob') {
+      var newMob = {'id': tileId, 'name': 'mob', 'health': 100};
+      mobMap.push(newMob);
+    }
 
-    $('.entities').append('<div class="entity entity--'+ entityType +' entity--'+ tileId +'" style="transform: translate('+ entityPosXPx +'px, '+ entityPosYPx +'px)">'+ tileId +'</div>');
+    $('.entities').append('<div class="entity entity--'+ entityType +' entity--'+ tileId +'" data-entity-id="'+ tileId +'" style="transform: translate('+ entityPosXPx +'px, '+ entityPosYPx +'px)">'+ tileId +'</div>');
   }
 }
 ;function shuffleArray(array) {
@@ -112,8 +191,6 @@ function showHitMarker() {
   firstTileSet = tileSets[0];
   lastTileSet = tileSets[tileSets.length-1];
 
-  console.log(lastTileSet);
-
   tileSets.shift();
   tileSets.splice(-1,1);
 
@@ -121,9 +198,8 @@ function showHitMarker() {
 
   firstTileSet.tiles.map(function(tile) {
     tileIndex++;
-    console.log('tileIndex: ' + tileIndex);
 
-    $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+    $('.tiles').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
 
     entityCheck(tile.entity, tileIndex);
   });
@@ -133,9 +209,8 @@ function showHitMarker() {
 
     tileArray.map(function(tile) {
       tileIndex++;
-      console.log('tileIndex: ' + tileIndex);
 
-      $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+      $('.tiles').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
 
       entityCheck(tile.entity, tileIndex);
     });
@@ -143,9 +218,8 @@ function showHitMarker() {
 
   lastTileSet.tiles.map(function(tile) {
     tileIndex++;
-    console.log('tileIndex: ' + tileIndex);
 
-    $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+    $('.tiles').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
 
     entityCheck(tile.entity, tileIndex);
   });
@@ -201,8 +275,6 @@ function showHitMarker() {
       }
     });
   });
-
-  console.log(playerPos);
 }
 
 function resetPlayerOrientation() {
@@ -226,7 +298,7 @@ function changePlayerHealthpool(healthChange, healthAlert = 'You Died.') {
 
   $('.health__bar').css('width', healthPool + '%');
 }
-;var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, tileSets, firstTileSet, lastTileSet;
+;var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, tileSets, firstTileSet, lastTileSet, mobMap, entityMap;
 
 $(function() {
   $.getJSON("/js/level.json", function(json){
@@ -237,7 +309,8 @@ $(function() {
 
   console.log(tileSets);
 
-  var entityMap = [];
+  entityMap = [];
+  mobMap = [];
 
   player = $('.player');
   playerPosX = 0;
@@ -250,7 +323,6 @@ $(function() {
   $('body').keydown(function() {
 
     if ( event.which === 39 ) { // Right Array
-      console.log('right');
       resetPlayerOrientation();
 
       movePlayer(playerPos + 1, 0, -32);
@@ -258,7 +330,6 @@ $(function() {
       playerOrientation = 'right';
     }
     if ( event.which === 37 ) { // Left Array
-      console.log('left');
       resetPlayerOrientation();
 
       movePlayer(playerPos - 1, 0, 32);
@@ -266,7 +337,6 @@ $(function() {
       playerOrientation = 'left';
     }
     if ( event.which === 38 ) {  // Up Array
-      console.log('up');
       resetPlayerOrientation();
 
       movePlayer(playerPos - 9, 32, 0);
@@ -274,7 +344,6 @@ $(function() {
       playerOrientation = 'up';
     }
     if ( event.which === 40 ) {  // Down Array
-      console.log('down');
       resetPlayerOrientation();
 
       movePlayer(playerPos + 9, -32, 0);

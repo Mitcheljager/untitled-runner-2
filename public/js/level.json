@@ -62,7 +62,7 @@
   "tiles": [
 
     {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
-    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "mob"},
     {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
     {"type": "wall", "variation": "bottom-corner-right",  "interaction": "0", "entity": "0"},
     {"type": "tile", "variation": "wall-bottom",          "interaction": "0", "entity": "0"},

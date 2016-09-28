@@ -44,8 +44,6 @@ function movePlayer(newPlayerPos, newPosY, newPosX) {
       }
     });
   });
-
-  console.log(playerPos);
 }
 
 function resetPlayerOrientation() {

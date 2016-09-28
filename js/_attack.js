@@ -26,18 +26,62 @@ function attackMain() {
         if (playerOrientation == 'up') {
           if (tileIndex == playerPos - 9) {
             showHitMarker();
+
+            var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
+
+            if (damageCurrentMob(tileIndex) == true) {
+              tile.interaction = 1;
+              tile.entity = 0;
+
+              targetEntityElement.remove();
+            } else {
+              mobHurtVisual(targetEntityElement);
+            }
           }
         } else if (playerOrientation == 'right') {
           if (tileIndex == playerPos + 1) {
             showHitMarker();
+
+            var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
+
+            if (damageCurrentMob(tileIndex) == true) {
+              tile.interaction = 1;
+              tile.entity = 0;
+
+              targetEntityElement.remove();
+            } else {
+              mobHurtVisual(targetEntityElement);
+            }
           }
         } else if (playerOrientation == 'down') {
           if (tileIndex == playerPos + 9) {
             showHitMarker();
+
+            var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
+
+            if (damageCurrentMob(tileIndex) == true) {
+              tile.interaction = 1;
+              tile.entity = 0;
+
+              targetEntityElement.remove();
+            } else {
+              mobHurtVisual(targetEntityElement);
+            }
           }
         } else if (playerOrientation == 'left') {
           if (tileIndex == playerPos - 1) {
             showHitMarker();
+
+            var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
+
+            if (damageCurrentMob(tileIndex) == true) {
+              tile.interaction = 1;
+              tile.entity = 0;
+
+              targetEntityElement.remove();
+            } else {
+              mobHurtVisual(targetEntityElement);
+            }
           }
         }
       }

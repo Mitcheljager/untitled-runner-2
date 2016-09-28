@@ -1,4 +1,4 @@
-var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, tileSets, firstTileSet, lastTileSet;
+var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, tileSets, firstTileSet, lastTileSet, mobMap, entityMap;
 
 $(function() {
   $.getJSON("/js/level.json", function(json){
@@ -9,7 +9,8 @@ $(function() {
 
   console.log(tileSets);
 
-  var entityMap = [];
+  entityMap = [];
+  mobMap = [];
 
   player = $('.player');
   playerPosX = 0;
@@ -22,7 +23,6 @@ $(function() {
   $('body').keydown(function() {
 
     if ( event.which === 39 ) { // Right Array
-      console.log('right');
       resetPlayerOrientation();
 
       movePlayer(playerPos + 1, 0, -32);
@@ -30,7 +30,6 @@ $(function() {
       playerOrientation = 'right';
     }
     if ( event.which === 37 ) { // Left Array
-      console.log('left');
       resetPlayerOrientation();
 
       movePlayer(playerPos - 1, 0, 32);
@@ -38,7 +37,6 @@ $(function() {
       playerOrientation = 'left';
     }
     if ( event.which === 38 ) {  // Up Array
-      console.log('up');
       resetPlayerOrientation();
 
       movePlayer(playerPos - 9, 32, 0);
@@ -46,7 +44,6 @@ $(function() {
       playerOrientation = 'up';
     }
     if ( event.which === 40 ) {  // Down Array
-      console.log('down');
       resetPlayerOrientation();
 
       movePlayer(playerPos + 9, -32, 0);

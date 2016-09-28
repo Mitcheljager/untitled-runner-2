@@ -11,6 +11,11 @@
   text-align: center;
   font-size: 12px;
   background-image: url('/img/tileset3.png');
+  transition: opacity 300ms;
+}
+
+.entity--hurting {
+  opacity: 0.5;
 }
 
 .entity--mob {

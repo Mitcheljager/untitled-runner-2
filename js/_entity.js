@@ -9,9 +9,11 @@ function entityCheck(entityType, tileId) {
     var entityPosYPx = entityPosY * 32;
     var entityPosXPx = entityPosX * 32;
 
-    console.log('EntityPosY: ' + entityPosY);
-    console.log('EntityPosX: ' + entityPosX);
+    if (entityType == 'mob') {
+      var newMob = {'id': tileId, 'name': 'mob', 'health': 100};
+      mobMap.push(newMob);
+    }
 
-    $('.entities').append('<div class="entity entity--'+ entityType +' entity--'+ tileId +'" style="transform: translate('+ entityPosXPx +'px, '+ entityPosYPx +'px)">'+ tileId +'</div>');
+    $('.entities').append('<div class="entity entity--'+ entityType +' entity--'+ tileId +'" data-entity-id="'+ tileId +'" style="transform: translate('+ entityPosXPx +'px, '+ entityPosYPx +'px)">'+ tileId +'</div>');
   }
 }

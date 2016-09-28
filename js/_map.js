@@ -4,8 +4,6 @@ function createMap() {
   firstTileSet = tileSets[0];
   lastTileSet = tileSets[tileSets.length-1];
 
-  console.log(lastTileSet);
-
   tileSets.shift();
   tileSets.splice(-1,1);
 
@@ -13,9 +11,8 @@ function createMap() {
 
   firstTileSet.tiles.map(function(tile) {
     tileIndex++;
-    console.log('tileIndex: ' + tileIndex);
 
-    $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+    $('.tiles').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
 
     entityCheck(tile.entity, tileIndex);
   });
@@ -25,9 +22,8 @@ function createMap() {
 
     tileArray.map(function(tile) {
       tileIndex++;
-      console.log('tileIndex: ' + tileIndex);
 
-      $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+      $('.tiles').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
 
       entityCheck(tile.entity, tileIndex);
     });
@@ -35,9 +31,8 @@ function createMap() {
 
   lastTileSet.tiles.map(function(tile) {
     tileIndex++;
-    console.log('tileIndex: ' + tileIndex);
 
-    $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+    $('.tiles').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
 
     entityCheck(tile.entity, tileIndex);
   });
