@@ -76,6 +76,12 @@ function movePlayer(newPlayerPos, newPosY, newPosX) {
 
       if (tileIndex == requestedPlayerPos) {
         if (tile.interaction != 0 && tile.entity != 'mob' && healthPool > 0) {
+          player.addClass('player--is-walking');
+
+          setTimeout(function() {
+            player.removeClass('player--is-walking');
+          }, 300);
+
           playerPosY += newPosY;
           playerPosX += newPosX;
 
@@ -99,7 +105,6 @@ function movePlayer(newPlayerPos, newPosY, newPosX) {
             $('.entity--'+ tileIndex).remove();
             $('.inventory').append('<div class="inventory-item">'+ tileIndex +'</div>');
           }
-
         }
       }
     });
@@ -126,6 +131,8 @@ function createMap() {
     console.log('tileIndex: ' + tileIndex);
 
     $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+
+    entityCheck(tile.entity, tileIndex);
   });
 
   tileSets.map(function(tileArray) {
@@ -137,21 +144,7 @@ function createMap() {
 
       $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
 
-      if (tile.entity != 0) {
-
-        var entityIndex = tileIndex -1
-
-        var entityPosY = Math.floor(entityIndex / 9);
-        var entityPosX = entityIndex - ((entityPosY * 10) - (Math.floor(entityIndex / 9)));
-
-        var entityPosYPx = entityPosY * 32;
-        var entityPosXPx = entityPosX * 32;
-
-        console.log('EntityPosY: ' + entityPosY);
-        console.log('EntityPosX: ' + entityPosX);
-
-        $('.entities').append('<div class="entity entity--'+ tile.entity +' entity--'+ tileIndex +'" style="transform: translate('+ entityPosXPx +'px, '+ entityPosYPx +'px)">'+ tileIndex +'</div>');
-      }
+      entityCheck(tile.entity, tileIndex);
     });
   });
 
@@ -160,10 +153,14 @@ function createMap() {
     console.log('tileIndex: ' + tileIndex);
 
     $('.tiles').append('<div class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+
+    entityCheck(tile.entity, tileIndex);
   });
 
   tileSets.unshift(firstTileSet);
   tileSets.push(lastTileSet);
+
+  playerPos = tileIndex - 22;
 }
 
 function changeHealthPool(healthChange, healthAlert = 'You Died.') {
@@ -257,7 +254,7 @@ function openChest(tileId) {
   if ($('.inventory .inventory-item').length) {
     alertBlock('You opened a chest.');
     $('.entity--'+ tileId).remove();
-    $('.inventory .inventory-item').remove();
+    $('.inventory .inventory-item').first().remove();
     return true;
   } else {
     alertBlock('You need a key to open the chest.');
@@ -281,4 +278,22 @@ function showAttack(direction) {
   setTimeout(function() {
     $('.attack').removeClass('attack--'+ direction +'');
   }, 200);
+}
+
+function entityCheck(entityType, tileId) {
+  if (entityType != 0) {
+
+    var entityIndex = tileId -1
+
+    var entityPosY = Math.floor(entityIndex / 9);
+    var entityPosX = entityIndex - ((entityPosY * 10) - (Math.floor(entityIndex / 9)));
+
+    var entityPosYPx = entityPosY * 32;
+    var entityPosXPx = entityPosX * 32;
+
+    console.log('EntityPosY: ' + entityPosY);
+    console.log('EntityPosX: ' + entityPosX);
+
+    $('.entities').append('<div class="entity entity--'+ entityType +' entity--'+ tileId +'" style="transform: translate('+ entityPosXPx +'px, '+ entityPosYPx +'px)">'+ tileId +'</div>');
+  }
 }

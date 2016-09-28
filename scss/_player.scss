@@ -1,3 +1,35 @@
+@keyframes animateWalkRight {
+  0% {
+    background-position: 0 -32px;
+  } 50% {
+    background-position: 0 -64px;
+  }
+}
+
+@keyframes animateWalkUp {
+  0% {
+    background-position: -32px -32px;
+  } 50% {
+    background-position: -32px -64px;
+  }
+}
+
+@keyframes animateWalkLeft {
+  0% {
+    background-position: -64px -32px;
+  } 50% {
+    background-position: -64px -64px;
+  }
+}
+
+@keyframes animateWalkDown {
+  0% {
+    background-position: -96px -32px;
+  } 50% {
+    background-position: -96px -64px;
+  }
+}
+
 .player {
   background-image: url('/img/sprite.png');
   background-position: -96px 0;
@@ -10,18 +42,30 @@
 
   &--look-left {
     background-position: -64px 0;
+    &.player--is-walking {
+      animation: animateWalkLeft 300ms steps(1);
+    }
   }
 
   &--look-right {
     background-position: 0 0;
+    &.player--is-walking {
+      animation: animateWalkRight 300ms steps(1);
+    }
   }
 
   &--look-down {
     background-position: -96px 0;
+    &.player--is-walking {
+      animation: animateWalkDown 300ms steps(1);
+    }
   }
 
   &--look-up {
     background-position: -32px 0;
+    &.player--is-walking {
+      animation: animateWalkUp 300ms steps(1);
+    }
   }
 
   &--falling {

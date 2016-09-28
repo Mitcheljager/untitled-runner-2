@@ -1,3 +1,21 @@
+@keyframes flipInX{
+  0% {
+    transform: perspective(400px) rotate3d(1,0,0,90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  } 40% {
+    transform: perspective(400px) rotate3d(1,0,0,-20deg);
+    animation-timing-function: ease-in;
+  } 60% {
+    transform: perspective(400px) rotate3d(1,0,0,10deg);
+    opacity: 1;
+  } 80% {
+    transform: perspective(400px) rotate3d(1,0,0,-5deg)
+  } 100% {
+    transform: perspective(400px);
+  }
+}
+
 .interface {
   position: absolute;
   top: 0;
@@ -136,4 +154,5 @@
   background: rgba(255,255,255,0.1);
   line-height: 32px;
   text-align: center;
+  animation: flipInX 1000ms forwards;
 }
