@@ -53,6 +53,10 @@
     <div class="backdrop"></div>
   </section>
 
+  <audio autoplay loop style="display: none;">
+    <source src="/music/when-times-were-calm.mp3" type="audio/mpeg">
+  </audio>
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="/js/app.js"></script>
 </body>

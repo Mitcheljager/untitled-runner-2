@@ -17,3 +17,7 @@ function entityCheck(entityType, tileId) {
     $('.entities').append('<div class="entity entity--'+ entityType +' entity--'+ tileId +'" data-entity-id="'+ tileId +'" style="transform: translate('+ entityPosXPx +'px, '+ entityPosYPx +'px)">'+ tileId +'</div>');
   }
 }
+
+function takeActionMobs() {
+  
+}

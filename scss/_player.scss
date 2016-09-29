@@ -30,8 +30,43 @@
   }
 }
 
+@keyframes animateAttackRight {
+  0% {
+    width: 64px;
+    background-position: 0 -128px;
+  } 15% {
+    background-position: -64px -128px;
+  } 30% {
+    background-position: -128px -128px;
+  } 45% {
+    background-position: -192px -128px;
+  } 60% {
+    background-position: -128px -128px;
+  } 75% {
+    background-position: -64px -128px;
+  }
+}
+
+@keyframes animateAttackLeft {
+  0% {
+    width: 64px;
+    left: 96px;
+    background-position: 0 -160px;
+  } 15% {
+    background-position: -64px -160px;
+  } 30% {
+    background-position: -128px -160px;
+  } 45% {
+    background-position: -192px -160px;
+  } 60% {
+    background-position: -128px -160px;
+  } 75% {
+    background-position: -64px -160px;
+  }
+}
+
 .player {
-  background-image: url('/img/sprite.png');
+  background-image: url('/img/player.png');
   background-position: -96px 0;
   width: 32px;
   height: 32px;
@@ -66,6 +101,22 @@
     &.player--is-walking {
       animation: animateWalkUp 300ms steps(1);
     }
+  }
+
+  &--attack-right {
+    animation: animateAttackRight 300ms steps(1);
+  }
+
+  &--attack-left {
+    animation: animateAttackLeft 300ms steps(1);
+  }
+
+  &--attack-up {
+    animation: animateAttackRight 300ms steps(1);
+  }
+
+  &--attack-down {
+    animation: animateAttackRight 300ms steps(1);
   }
 
   &--falling {

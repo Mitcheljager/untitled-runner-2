@@ -1,6 +1,6 @@
 function attackMain() {
-  $('.attack').removeClass (function (index, css) {
-    return (css.match (/(^|\s)attack--\S+/g) || []).join(' ');
+  $('.player').removeClass (function (index, css) {
+    return (css.match (/(^|\s)player--attack-\S+/g) || []).join(' ');
   });
 
   showAttack(playerOrientation);
@@ -90,9 +90,9 @@ function attackMain() {
 }
 
 function showAttack(direction) {
-  $('.attack').addClass('attack--'+ direction +'');
+  $('.player').addClass('player--attack-'+ direction +'');
 
   setTimeout(function() {
-    $('.attack').removeClass('attack--'+ direction +'');
-  }, 200);
+    $('.player').removeClass('player--attack-'+ direction +'');
+  }, 300);
 }

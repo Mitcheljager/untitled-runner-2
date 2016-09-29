@@ -10,8 +10,8 @@ function openChest(tileId) {
   }
 }
 ;function attackMain() {
-  $('.attack').removeClass (function (index, css) {
-    return (css.match (/(^|\s)attack--\S+/g) || []).join(' ');
+  $('.player').removeClass (function (index, css) {
+    return (css.match (/(^|\s)player--attack-\S+/g) || []).join(' ');
   });
 
   showAttack(playerOrientation);
@@ -101,11 +101,11 @@ function openChest(tileId) {
 }
 
 function showAttack(direction) {
-  $('.attack').addClass('attack--'+ direction +'');
+  $('.player').addClass('player--attack-'+ direction +'');
 
   setTimeout(function() {
-    $('.attack').removeClass('attack--'+ direction +'');
-  }, 200);
+    $('.player').removeClass('player--attack-'+ direction +'');
+  }, 300);
 }
 ;function damageCurrentMob(entityId) {
 
@@ -158,6 +158,10 @@ function mobHurtVisual(element) {
 
     $('.entities').append('<div class="entity entity--'+ entityType +' entity--'+ tileId +'" data-entity-id="'+ tileId +'" style="transform: translate('+ entityPosXPx +'px, '+ entityPosYPx +'px)">'+ tileId +'</div>');
   }
+}
+
+function takeActionMobs() {
+  
 }
 ;function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {

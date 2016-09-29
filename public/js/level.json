@@ -235,6 +235,150 @@
     {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"}
   ]
 }, {
+  "id": "7",
+  "type": "normal",
+  "tiles": [
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"},
+
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"}
+  ]
+}, {
+  "id": "8",
+  "type": "normal",
+  "tiles": [
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"},
+
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"}
+  ]
+}, {
+  "id": "9",
+  "type": "normal",
+  "tiles": [
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"},
+
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"}
+  ]
+}, {
+  "id": "10",
+  "type": "normal",
+  "tiles": [
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"},
+
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"}
+  ]
+}, {
+  "id": "11",
+  "type": "normal",
+  "tiles": [
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"},
+
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"}
+  ]
+}, {
+  "id": "12",
+  "type": "normal",
+  "tiles": [
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"},
+
+    {"type": "wall", "variation": "wall-left",            "interaction": "0", "entity": "0"},
+    {"type": "tile", "variation": "floor-left",           "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "regular",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
+    {"type": "wall", "variation": "wall-right",           "interaction": "0", "entity": "0"}
+  ]
+}, {
   "id": "100",
   "type": "bottom",
   "tiles": [
