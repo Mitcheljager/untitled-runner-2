@@ -14,7 +14,7 @@ module.exports = function(grunt) {
 				tasks: ['sass', 'autoprefixer']
 			},
 			js: {
-				files: '**/*.js',
+				files: 'javascript/*.js',
 				tasks: ['concat']
 			}
 		},
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 	      separator: ';',
 	    },
 	    dist: {
-	      src: ['js/*.js'],
+	      src: ['javascript/*.js'],
 	      dest: 'public/js/app.js',
 	    },
 	  }

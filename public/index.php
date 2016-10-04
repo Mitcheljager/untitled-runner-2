@@ -46,6 +46,7 @@
 
       <div class="tiles">
         <div class="entities"></div>
+        <div class="tileset"></div>
       </div>
 
     </div>

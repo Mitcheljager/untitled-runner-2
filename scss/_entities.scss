@@ -1,5 +1,7 @@
 .entities {
   position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .entity {
@@ -12,6 +14,8 @@
   font-size: 12px;
   background-image: url('/img/tileset3.png');
   transition: opacity 300ms;
+  bottom: 0;
+  right: 0;
 }
 
 .entity--hurting {
@@ -20,6 +24,7 @@
 
 .entity--mob {
   background: transparent;
+  transition: opacity 300ms, transform 300ms;
 }
 
 .entity--key {
@@ -42,7 +47,7 @@
 }
 
 .entity--torch {
-  top: 16px;
+  bottom: -16px;
   background-position: -96px -128px;
   animation: entity--torch 2000ms steps(1) infinite;
   color: transparent;
@@ -56,7 +61,7 @@
 .entity--chest {
   background-position: -64px -160px;
   color: transparent;
-  top: 4px;
+  bottom: -4px;
 }
 
 .entity--spikes {

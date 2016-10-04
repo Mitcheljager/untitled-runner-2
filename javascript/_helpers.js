@@ -7,3 +7,7 @@ function shuffleArray(array) {
   }
   return array;
 }
+
+Array.prototype.getRandomArrayItem = function() {
+  return this[Math.floor(Math.random()*this.length)];
+}

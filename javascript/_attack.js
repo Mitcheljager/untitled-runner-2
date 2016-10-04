@@ -5,16 +5,16 @@ function attackMain() {
 
   showAttack(playerOrientation);
 
-  var tileIndex = 0;
+  var tileIndex = totalTileCount;
 
   tileSets.map(function(tileArray) {
     var tileArray = tileArray.tiles;
 
     tileArray.map(function(tile) {
-      tileIndex++;
+      tileIndex--;
 
       if (tile.entity == 'chest') {
-        if (tileIndex == playerPos - 9) {
+        if (tileIndex - 9 == playerPos) {
           if (openChest(tileIndex)) {
             tile.entity = 0;
             tile.interaction = 1;
@@ -24,10 +24,10 @@ function attackMain() {
 
       if (tile.entity == 'mob') {
         if (playerOrientation == 'up') {
-          if (tileIndex == playerPos - 9) {
+          if (tileIndex - 9 == playerPos) {
             showHitMarker();
 
-            var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
+            var targetEntityElement = $('.entity--mob[data-entity-id="'+ tileIndex +'"]');
 
             if (damageCurrentMob(tileIndex) == true) {
               tile.interaction = 1;
@@ -39,10 +39,10 @@ function attackMain() {
             }
           }
         } else if (playerOrientation == 'right') {
-          if (tileIndex == playerPos + 1) {
+          if (tileIndex + 1 == playerPos) {
             showHitMarker();
 
-            var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
+            var targetEntityElement = $('.entity--mob[data-entity-id="'+ tileIndex +'"]');
 
             if (damageCurrentMob(tileIndex) == true) {
               tile.interaction = 1;
@@ -54,7 +54,7 @@ function attackMain() {
             }
           }
         } else if (playerOrientation == 'down') {
-          if (tileIndex == playerPos + 9) {
+          if (tileIndex + 9 == playerPos) {
             showHitMarker();
 
             var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');
@@ -69,7 +69,7 @@ function attackMain() {
             }
           }
         } else if (playerOrientation == 'left') {
-          if (tileIndex == playerPos - 1) {
+          if (tileIndex - 1 == playerPos) {
             showHitMarker();
 
             var targetEntityElement = $('[data-entity-id="'+ tileIndex +'"]');

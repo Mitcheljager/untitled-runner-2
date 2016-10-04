@@ -25,7 +25,7 @@ function createMap() {
   // firstTileSet.tiles.map(function(tile) {
   //   tileIndex--;
   //
-  //   $('.tiles').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+  //   $('.tileset').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
   //
   //   entityCheck(tile.entity, tileIndex);
   // });
@@ -39,7 +39,7 @@ function createMap() {
       tileIndex--;
 
 
-      $('.tiles').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+      $('.tileset').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
 
       entityCheck(tile.entity, tileIndex);
     });
@@ -48,7 +48,7 @@ function createMap() {
   lastTileSet.tiles.map(function(tile) {
     tileIndex--;
 
-    $('.tiles').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+    $('.tileset').append('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
 
     entityCheck(tile.entity, tileIndex);
   });
@@ -63,20 +63,33 @@ function createMap() {
 
 function addTileArray() {
   var tileIndex = totalTileCount;
+  var newTileElements = JSON.parse(JSON.stringify(originalTileSets));
 
-  tileSets.map(function(tileArray) {
-    if (tileArray.id == 5) {
-      newTiles = tileArray.tiles.reverse();
+  $.each(newTileElements, function(key, tileArray) {
+    if (tileArray.id == 3) {
+      newTiles = tileArray.tiles;
 
-      newTiles.map(function(tile) {
-        $('.tiles').prepend('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
-        entityCheck(tile.entity, tileIndex - 1);
+      console.log(tileIndex);
+
+      newTiles.reverse().map(function(tile) {
+        newTileElements.push('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+
+        entityCheck(tile.entity, tileIndex);
 
         tileIndex++;
         totalTileCount++;
       });
 
       tileSets.unshift(tileArray);
+      tileSets[0]['id'] = 14;
+
+      newTileElements.map(function(tile) {
+        $('.tileset').prepend(tile);
+      });
+
+      newTiles.reverse();
+
+      return false;
     }
   });
 }

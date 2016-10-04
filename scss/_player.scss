@@ -11,15 +11,28 @@
 }
 
 @keyframes animateAttackRight {
+  0% {
+
+  } 50% {
+    width: 64px;
+    background-position: 0 -64px;
+  }
 }
 
 @keyframes animateAttackLeft {
+  0% {
+
+  } 50% {
+    left: 96px;
+    width: 64px;
+    background-position: -64px -64px;
+  }
 }
 
 .player {
   background-image: url('/img/player.png');
   background-position: 0 0;
-  width: 64px;
+  width: 32px;
   height: 64px;
   left: 128px;
   bottom: 268px;
@@ -27,7 +40,7 @@
   z-index: 10;
 
   &--look-left {
-    background-position: -64px 0;
+    background-position: -32px 0;
     &.player--is-walking {
       animation: animateWalkLeft 300ms steps(1);
     }

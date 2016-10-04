@@ -1,13 +1,19 @@
 function movePlayer(newPlayerPos, newPosY, newPosX) {
+  resetPlayerOrientation();
+
   requestedPlayerPos = newPlayerPos;
 
-  var tileIndex = 0;
+  var tileIndex = totalTileCount;
 
   tileSets.map(function(tileArray) {
     tileArray = tileArray.tiles;
 
     tileArray.map(function(tile) {
-      tileIndex++;
+      tileIndex--;
+
+      if (playerPos > totalTileCount - 18) {
+        addTileArray();
+      }
 
       if (tileIndex == requestedPlayerPos) {
         if (tile.interaction != 0 && tile.entity != 'mob' && healthPool > 0) {
@@ -40,6 +46,8 @@ function movePlayer(newPlayerPos, newPosY, newPosX) {
 
             tile.entity = 0;
           }
+
+          // takeActionMobs();
         }
       }
     });
