@@ -23,7 +23,7 @@
   0% {
 
   } 50% {
-    left: 96px;
+    left: calc((100vw - 288px) / 2 + 96px);
     width: 64px;
     background-position: -64px -64px;
   }
@@ -34,7 +34,7 @@
   background-position: 0 0;
   width: 32px;
   height: 64px;
-  left: 128px;
+  left: calc((100vw - 288px) / 2 + 128px);
   bottom: 268px;
   position: absolute;
   z-index: 10;

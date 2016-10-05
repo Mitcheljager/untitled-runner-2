@@ -9,6 +9,18 @@ function openChest(tileId) {
     return false;
   }
 }
+
+function openDoor(tileId) {
+  if ($('.inventory .inventory-item').length) {
+    alertBlock('You opened a door.');
+    $('.entity--'+ tileId).addClass('entity--door--open');
+    $('.inventory .inventory-item').first().remove();
+    return true;
+  } else {
+    alertBlock('You need a key to open the door.');
+    return false;
+  }
+}
 ;function attackMain() {
   $('.player').removeClass (function (index, css) {
     return (css.match (/(^|\s)player--attack-\S+/g) || []).join(' ');
@@ -28,6 +40,15 @@ function openChest(tileId) {
         if (tileIndex - 9 == playerPos) {
           if (openChest(tileIndex)) {
             tile.entity = 0;
+            tile.interaction = 1;
+          }
+        }
+      }
+
+      if (tile.entity == 'door') {
+        if (tileIndex - 9 == playerPos) {
+          if (openDoor(tileIndex)) {
+            tile.entity = 'door-open';
             tile.interaction = 1;
           }
         }
@@ -142,46 +163,49 @@ function mobHurtVisual(element) {
 }
 
 function takeActionMobs() {
-  var tileIndex = 0;
+  var tileIndex = totalTileCount;
+
+  var playerRow = Math.floor(playerPos / 9) + 1;
 
   $.each(tileSets, function(key, tileArray) {
     tileArray = tileArray.tiles;
 
     $.each(tileArray, function(key, tile) {
-      tileIndex++;
+      tileIndex--;
+      var tileRow = Math.floor(tileIndex / 9) + 1;
 
       if (tile.entity == 'mob') {
-        if (tileIndex < playerPos + 45 && tileIndex > playerPos - 45) {
+        if (tileIndex < playerPos + 36 && tileIndex > playerPos - 36) {
           console.log('in range');
 
-          if (tileIndex < playerPos - 1 && tileIndex > playerPos - 10) { // Player is to the right
-            if (moveMobPosition(tileIndex, tileIndex + 1) != false) {
-              tile.entity = 0;
-            }
-
-            console.log('right');
-            return false;
-          } else if (tileIndex > playerPos + 1 && tileIndex > playerPos - 10) { // Player is left
+          if (tileIndex > playerPos && tileIndex - 10 < playerPos && playerRow == tileRow) { // Player is to the right
             if (moveMobPosition(tileIndex, tileIndex - 1) != false) {
-              tile.entity = 0;
+              removeEntity(tileIndex);
+              console.log('right');
+              return false;
             }
 
-            console.log('left');
-            return false;
-          } else if (tileIndex < playerPos + 10) { // Player is below
-            if (moveMobPosition(tileIndex, tileIndex + 9) != false) {
-              tile.entity = 0;
+          } else if (tileIndex < playerPos && tileIndex + 10 > playerPos && playerRow == tileRow) { // Player is left
+            if (moveMobPosition(tileIndex, tileIndex + 1) != false) {
+              removeEntity(tileIndex);
+              console.log('left');
+              return false;
             }
 
-            console.log('below');
-            return false;
-          } else if (tileIndex > playerPos + 10) { // Player is above
+          } else if (tileIndex > playerPos) { // Player is below
             if (moveMobPosition(tileIndex, tileIndex - 9) != false) {
-              tile.entity = 0;
+              removeEntity(tileIndex);
+              console.log('below');
+              return false;
             }
 
-            console.log('above');
-            return false;
+          } else if (tileIndex < playerPos) { // Player is above
+            if (moveMobPosition(tileIndex, tileIndex + 9) != false) {
+              removeEntity(tileIndex);
+              console.log('above');
+              return false;
+            }
+
           }
         }
       }
@@ -190,25 +214,25 @@ function takeActionMobs() {
 }
 
 function moveMobPosition(currentTileId, newTileId) {
-  var entityIndex = newTileId - 1;
+  var entityIndex = newTileId;
 
   var entityPosY = Math.floor(entityIndex / 9);
   var entityPosX = entityIndex - ((entityPosY * 10) - (Math.floor(entityIndex / 9)));
 
-  var entityPosYPx = entityPosY * 32;
-  var entityPosXPx = entityPosX * 32;
+  var entityPosYPx = (entityPosY * 32) * -1;
+  var entityPosXPx = (entityPosX * 32) * -1;
 
-  var tileIndex = 0;
+  var tileIndex = totalTileCount;
 
   tileSets.map(function(tileArray) {
     tileArray = tileArray.tiles;
 
     tileArray.map(function(tile) {
-      tileIndex++;
+      tileIndex--;
 
       if (tileIndex == newTileId) {
 
-        if (tile.interaction == 1) {
+        if (tile.interaction == 1 && tileIndex != playerPos && tile.entity != 'mob') {
           mobMap.map(function(mob) {
             if (mob.id == currentTileId) {
               tile.entity = 'mob';
@@ -227,6 +251,22 @@ function moveMobPosition(currentTileId, newTileId) {
         }
       } else {
         return false;
+      }
+    });
+  });
+}
+
+function removeEntity(entityId) {
+  var tileIndex = totalTileCount;
+
+  tileSets.map(function(tileArray) {
+    tileArray = tileArray.tiles;
+
+    tileArray.map(function(tile) {
+      tileIndex--;
+
+      if (tileIndex == entityId) {
+        tile.entity = '0';
       }
     });
   });
@@ -376,8 +416,15 @@ function addTileArray() {
   var tileIndex = totalTileCount;
   var newTileElements = JSON.parse(JSON.stringify(originalTileSets));
 
+  newTileElements.shift();
+  newTileElements.pop();
+
+  var newTileElementsLength = newTileElements.length;
+
+  var newTilesNumber = Math.floor(Math.random() * newTileElementsLength) + 1;
+
   $.each(newTileElements, function(key, tileArray) {
-    if (tileArray.id == 3) {
+    if (tileArray.id == newTilesNumber) {
       newTiles = tileArray.tiles;
 
       console.log(tileIndex);
@@ -417,7 +464,7 @@ function addTileArray() {
     tileArray.map(function(tile) {
       tileIndex--;
 
-      if (playerPos > totalTileCount - 18) {
+      if (playerPos > totalTileCount - 126) {
         addTileArray();
       }
 
@@ -453,7 +500,7 @@ function addTileArray() {
             tile.entity = 0;
           }
 
-          // takeActionMobs();
+          takeActionMobs();
         }
       }
     });
@@ -501,4 +548,8 @@ $(function() {
   playerOrientation = 'down';
 
   healthPool = 100;
+});
+
+$(window).load(function() {
+  $('body').removeClass('loading');
 });

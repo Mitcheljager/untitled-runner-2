@@ -11,7 +11,7 @@ function movePlayer(newPlayerPos, newPosY, newPosX) {
     tileArray.map(function(tile) {
       tileIndex--;
 
-      if (playerPos > totalTileCount - 18) {
+      if (playerPos > totalTileCount - 126) {
         addTileArray();
       }
 
@@ -47,7 +47,7 @@ function movePlayer(newPlayerPos, newPosY, newPosX) {
             tile.entity = 0;
           }
 
-          // takeActionMobs();
+          takeActionMobs();
         }
       }
     });

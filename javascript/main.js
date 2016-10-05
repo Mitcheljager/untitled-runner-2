@@ -19,3 +19,7 @@ $(function() {
 
   healthPool = 100;
 });
+
+$(window).load(function() {
+  $('body').removeClass('loading');
+});

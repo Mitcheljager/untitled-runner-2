@@ -13,7 +13,7 @@
   <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+<body class="loading">
   <section class="app">
     <div class="interface">
       <div class="health">

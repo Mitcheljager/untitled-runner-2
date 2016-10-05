@@ -2,13 +2,15 @@
   transition: transform 300ms;
   position: absolute;
   bottom: 200px;
+  width: 32px * 9;
+  margin-left: calc((100vw - 288px) / 2);
 }
 
 .tile {
   width: 32px;
   height: 32px;
   float: left;
-  margin: 0;
+  margin: 0 auto;
   background-image: url('/img/tileset3.png');
   background-position: -96px 0;
 }

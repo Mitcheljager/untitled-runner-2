@@ -6,7 +6,7 @@
 
 .entity {
   position: absolute;
-  color: red;
+  color: transparent;
   height: 32px;
   width: 32px;
   line-height: 32px;
@@ -23,7 +23,7 @@
 }
 
 .entity--mob {
-  background: transparent;
+  background-image: url('/img/monster-sprites.png');
   transition: opacity 300ms, transform 300ms;
 }
 
@@ -62,6 +62,17 @@
   background-position: -64px -160px;
   color: transparent;
   bottom: -4px;
+}
+
+.entity--door {
+  height: 64px;
+  top: -38px;
+  background-position: -128px -160px;
+  color: transparent;
+
+  &--open {
+    background-position: -160px -160px;
+  }
 }
 
 .entity--spikes {

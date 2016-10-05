@@ -65,8 +65,15 @@ function addTileArray() {
   var tileIndex = totalTileCount;
   var newTileElements = JSON.parse(JSON.stringify(originalTileSets));
 
+  newTileElements.shift();
+  newTileElements.pop();
+
+  var newTileElementsLength = newTileElements.length;
+
+  var newTilesNumber = Math.floor(Math.random() * newTileElementsLength) + 1;
+
   $.each(newTileElements, function(key, tileArray) {
-    if (tileArray.id == 3) {
+    if (tileArray.id == newTilesNumber) {
       newTiles = tileArray.tiles;
 
       console.log(tileIndex);

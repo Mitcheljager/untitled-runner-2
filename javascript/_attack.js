@@ -22,6 +22,15 @@ function attackMain() {
         }
       }
 
+      if (tile.entity == 'door') {
+        if (tileIndex - 9 == playerPos) {
+          if (openDoor(tileIndex)) {
+            tile.entity = 'door-open';
+            tile.interaction = 1;
+          }
+        }
+      }
+
       if (tile.entity == 'mob') {
         if (playerOrientation == 'up') {
           if (tileIndex - 9 == playerPos) {
