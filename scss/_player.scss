@@ -35,7 +35,7 @@
   width: 32px;
   height: 64px;
   left: calc((100vw - 288px) / 2 + 128px);
-  bottom: 268px;
+  bottom: 264px;
   position: absolute;
   z-index: 10;
 
@@ -119,4 +119,14 @@
     transform: translateY(-32px);
     background-position: -64px 0;
   }
+}
+
+.shield {
+  width: 64px;
+  height: 64px;
+  margin-top: -16px;
+  margin-left: -16px;
+  border-radius: 16px;
+  background: url('/img/player.png');
+  background-position: -192px -64px;
 }

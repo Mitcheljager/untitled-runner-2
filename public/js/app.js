@@ -408,8 +408,6 @@ function showHitMarker() {
   tileSets.push(lastTileSet);
 
   playerPos = 22;
-
-  console.log(totalTileCount);
 }
 
 function addTileArray() {
@@ -528,6 +526,23 @@ function changePlayerHealthpool(healthChange, healthAlert = 'You Died.') {
 
   $('.health__bar').css('width', healthPool + '%');
 }
+;function rotateShield(event) {
+  var shield = $('.shield');
+  var offset = shield.offset();
+
+  var centerX = offset.left + 32;
+  var centerY = offset.top + 32;
+  var mouseX = event.pageX;
+  var mouseY = event.pageY;
+
+  var radians = Math.atan2(mouseX - centerX, mouseY - centerY);
+  var rotation = (radians * (180 / Math.PI) * -1) + 225;
+  var rotationRounded = Math.floor(rotation / 90) * 90;
+
+  shield.css('transform', 'rotate('+ rotationRounded +'deg)');
+}
+
+$('.shield-swapper').mousemove(rotateShield);
 ;var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, originalTileSets, tileSets, firstTileSet, lastTileSet, mobMap, totalTileCount;
 
 $(function() {
@@ -548,6 +563,33 @@ $(function() {
   playerOrientation = 'down';
 
   healthPool = 100;
+
+  var a = 7,
+      b = 3,
+      c = 5,
+      d = 12,
+      e = 0,
+      f = 9,
+      g = 14,
+      h = 1,
+      i = 11,
+      j = 2,
+      k = 8,
+      l = 15,
+      m = 10,
+      n = 4,
+      o = 13,
+      p = 6;
+
+  var q = (f - b) * (g - i) + o + (p * j) - a;
+  var r = k + l + e * (m - d) + c - n - h;
+  var s = q + r;
+  var t = q - r;
+
+  console.log(q);
+  console.log(r);
+  console.log(s);
+  console.log(t);
 });
 
 $(window).load(function() {

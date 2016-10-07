@@ -26,6 +26,8 @@
 
       <div class="inventory"></div>
 
+      <div class="shield-swapper"></div>
+
       <nav class="controls">
         <div class="controls__btn controls__btn--up">&lt;</div>
         <div class="controls__btn controls__btn--right">&lt;</div>
@@ -42,6 +44,7 @@
 
       <div class="player">
         <div class="attack"></div>
+        <div class="shield"></div>
       </div>
 
       <div class="tiles">

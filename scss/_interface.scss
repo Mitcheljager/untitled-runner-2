@@ -155,3 +155,12 @@
   animation: flipInX 1000ms forwards;
   position: relative;
 }
+
+.shield-swapper {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  position: fixed;
+  left: calc(50vw - 48px);
+  bottom: 232px;
+}

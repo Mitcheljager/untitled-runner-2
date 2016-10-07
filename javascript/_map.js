@@ -57,8 +57,6 @@ function createMap() {
   tileSets.push(lastTileSet);
 
   playerPos = 22;
-
-  console.log(totalTileCount);
 }
 
 function addTileArray() {
