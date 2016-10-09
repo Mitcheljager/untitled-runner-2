@@ -64,7 +64,7 @@ function openDoor(tileId) {
             if (damageCurrentMob(tileIndex) == true) {
               tile.interaction = 1;
               tile.entity = 0;
-
+              
               targetEntityElement.remove();
             } else {
               mobHurtVisual(targetEntityElement);
@@ -79,7 +79,7 @@ function openDoor(tileId) {
             if (damageCurrentMob(tileIndex) == true) {
               tile.interaction = 1;
               tile.entity = 0;
-
+              
               targetEntityElement.remove();
             } else {
               mobHurtVisual(targetEntityElement);
@@ -94,7 +94,7 @@ function openDoor(tileId) {
             if (damageCurrentMob(tileIndex) == true) {
               tile.interaction = 1;
               tile.entity = 0;
-
+              
               targetEntityElement.remove();
             } else {
               mobHurtVisual(targetEntityElement);
@@ -109,7 +109,7 @@ function openDoor(tileId) {
             if (damageCurrentMob(tileIndex) == true) {
               tile.interaction = 1;
               tile.entity = 0;
-
+              
               targetEntityElement.remove();
             } else {
               mobHurtVisual(targetEntityElement);
@@ -119,6 +119,8 @@ function openDoor(tileId) {
       }
     });
   });
+
+  takeActionMobs();
 }
 
 function showAttack(direction) {
@@ -137,6 +139,10 @@ function showAttack(direction) {
     if (mob.id == entityId) {
       if (checkMobHealth(mob.health) == true) {
         mob.health = mob.health - 25;
+
+        if (mob.health == 0) {
+          mobDeath = true;
+        }
       } else {
         mobDeath = true;
       }
@@ -163,53 +169,44 @@ function mobHurtVisual(element) {
 }
 
 function takeActionMobs() {
-  var tileIndex = totalTileCount;
+  var tileIndex = 0;
 
   var playerRow = Math.floor(playerPos / 9) + 1;
 
-  $.each(tileSets, function(key, tileArray) {
-    tileArray = tileArray.tiles;
+  $.each(mobMap, function(key, mob) {
+    if (mob.health > 0) {
+      var tileRow = Math.floor(mob.id / 9) + 1;
 
-    $.each(tileArray, function(key, tile) {
-      tileIndex--;
-      var tileRow = Math.floor(tileIndex / 9) + 1;
+      if (mob.id < playerPos + 48 && mob.id > playerPos - 48) {
+        console.log('in range');
 
-      if (tile.entity == 'mob') {
-        if (tileIndex < playerPos + 36 && tileIndex > playerPos - 36) {
-          console.log('in range');
-
-          if (tileIndex > playerPos && tileIndex - 10 < playerPos && playerRow == tileRow) { // Player is to the right
-            if (moveMobPosition(tileIndex, tileIndex - 1) != false) {
-              removeEntity(tileIndex);
-              console.log('right');
-              return false;
-            }
-
-          } else if (tileIndex < playerPos && tileIndex + 10 > playerPos && playerRow == tileRow) { // Player is left
-            if (moveMobPosition(tileIndex, tileIndex + 1) != false) {
-              removeEntity(tileIndex);
-              console.log('left');
-              return false;
-            }
-
-          } else if (tileIndex > playerPos) { // Player is below
-            if (moveMobPosition(tileIndex, tileIndex - 9) != false) {
-              removeEntity(tileIndex);
-              console.log('below');
-              return false;
-            }
-
-          } else if (tileIndex < playerPos) { // Player is above
-            if (moveMobPosition(tileIndex, tileIndex + 9) != false) {
-              removeEntity(tileIndex);
-              console.log('above');
-              return false;
-            }
-
+        if (mob.id > playerPos && mob.id - 10 < playerPos && playerRow == tileRow) { // Player is to the right
+          if (moveMobPosition(mob.id, mob.id - 1) == 1) {
+            mob.id = mob.id - 1;
+            console.log('right');
           }
+
+        } else if (mob.id < playerPos && mob.id + 10 > playerPos && playerRow == tileRow) { // Player is left
+          if (moveMobPosition(mob.id, mob.id + 1) == 1) {
+            mob.id = mob.id + 1;
+            console.log('left');
+          }
+
+        } else if (mob.id > playerPos) { // Player is below
+          if (moveMobPosition(mob.id, mob.id - 9) == 1) {
+            mob.id = mob.id - 9;
+            console.log('below');
+          }
+
+        } else if (mob.id < playerPos) { // Player is above
+          if (moveMobPosition(mob.id, mob.id + 9) == 1) {
+            mob.id = mob.id + 9;
+            console.log('above');
+          }
+
         }
       }
-    });
+    }
   });
 }
 
@@ -223,6 +220,8 @@ function moveMobPosition(currentTileId, newTileId) {
   var entityPosXPx = (entityPosX * 32) * -1;
 
   var tileIndex = totalTileCount;
+
+  var changed = true;
 
   tileSets.map(function(tileArray) {
     tileArray = tileArray.tiles;
@@ -241,22 +240,22 @@ function moveMobPosition(currentTileId, newTileId) {
               $('.entity--mob[data-entity-id="'+ currentTileId +'"]').css('transform','translate('+ entityPosXPx +'px, '+ entityPosYPx +'px)');
               $('.entity--mob[data-entity-id="'+ currentTileId +'"]').removeAttr('data-entity-id').attr('data-entity-id', newTileId);
 
-              return true;
+              changed = true;
+
+              return 1;
             } else {
-              return false;
+
             }
           });
-        } else {
-          return false;
         }
-      } else {
-        return false;
       }
     });
   });
+
+  removeOldMobPosition();
 }
 
-function removeEntity(entityId) {
+function removeOldMobPosition() {
   var tileIndex = totalTileCount;
 
   tileSets.map(function(tileArray) {
@@ -265,8 +264,14 @@ function removeEntity(entityId) {
     tileArray.map(function(tile) {
       tileIndex--;
 
-      if (tileIndex == entityId) {
-        tile.entity = '0';
+      if (tile.entity == 'mob') {
+        tile.entity = 0;
+
+        $.each(mobMap, function(key, mob) {
+          if (mob.id == tileIndex && mob.health > 0) {
+            tile.entity = 'mob';
+          }
+        });
       }
     });
   });
@@ -563,33 +568,6 @@ $(function() {
   playerOrientation = 'down';
 
   healthPool = 100;
-
-  var a = 7,
-      b = 3,
-      c = 5,
-      d = 12,
-      e = 0,
-      f = 9,
-      g = 14,
-      h = 1,
-      i = 11,
-      j = 2,
-      k = 8,
-      l = 15,
-      m = 10,
-      n = 4,
-      o = 13,
-      p = 6;
-
-  var q = (f - b) * (g - i) + o + (p * j) - a;
-  var r = k + l + e * (m - d) + c - n - h;
-  var s = q + r;
-  var t = q - r;
-
-  console.log(q);
-  console.log(r);
-  console.log(s);
-  console.log(t);
 });
 
 $(window).load(function() {

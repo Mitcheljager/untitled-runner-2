@@ -41,7 +41,7 @@ function attackMain() {
             if (damageCurrentMob(tileIndex) == true) {
               tile.interaction = 1;
               tile.entity = 0;
-
+              
               targetEntityElement.remove();
             } else {
               mobHurtVisual(targetEntityElement);
@@ -56,7 +56,7 @@ function attackMain() {
             if (damageCurrentMob(tileIndex) == true) {
               tile.interaction = 1;
               tile.entity = 0;
-
+              
               targetEntityElement.remove();
             } else {
               mobHurtVisual(targetEntityElement);
@@ -71,7 +71,7 @@ function attackMain() {
             if (damageCurrentMob(tileIndex) == true) {
               tile.interaction = 1;
               tile.entity = 0;
-
+              
               targetEntityElement.remove();
             } else {
               mobHurtVisual(targetEntityElement);
@@ -86,7 +86,7 @@ function attackMain() {
             if (damageCurrentMob(tileIndex) == true) {
               tile.interaction = 1;
               tile.entity = 0;
-
+              
               targetEntityElement.remove();
             } else {
               mobHurtVisual(targetEntityElement);
@@ -96,6 +96,8 @@ function attackMain() {
       }
     });
   });
+
+  takeActionMobs();
 }
 
 function showAttack(direction) {
