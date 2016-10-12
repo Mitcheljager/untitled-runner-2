@@ -15,6 +15,13 @@ function openDoor(tileId) {
     alertBlock('You opened a door.');
     $('.entity--'+ tileId).addClass('entity--door--open');
     $('.inventory .inventory-item').first().remove();
+
+    // for (i = 0; i < 5; i++) {
+    //   addTileArray();
+    // }
+    //
+    // addDoor();
+
     return true;
   } else {
     alertBlock('You need a key to open the door.');
@@ -247,6 +254,12 @@ function moveMobPosition(currentTileId, newTileId) {
 
             }
           });
+        } else if (tileIndex == playerPos) {
+          console.log('Monster Attack');
+          tile.entity = 'mob';
+
+          changePlayerHealthpool(-1, 'You died to an Enemy.');
+        } else {
         }
       }
     });
@@ -326,33 +339,40 @@ function showHitMarker() {
     $('.hit-marker').removeClass('hit-marker--is-active');
   }, 200);
 }
-;$('body').keydown(function() {
+;$('body').on('keydown', function() {
 
-  if ( event.which === 39 ) { // Right Array
+  if (event.which === 39) { // Right Array
     movePlayer(playerPos - 1, 0, -32);
     player.addClass('player--look-right');
     playerOrientation = 'right';
   }
-  if ( event.which === 37 ) { // Left Array
+  if (event.which === 37) { // Left Array
     movePlayer(playerPos + 1, 0, 32);
     player.addClass('player--look-left');
     playerOrientation = 'left';
   }
-  if ( event.which === 38 ) {  // Up Array
+  if (event.which === 38) {  // Up Array
     movePlayer(playerPos + 9, 32, 0);
     player.addClass('player--look-up');
     playerOrientation = 'up';
   }
-  if ( event.which === 40 ) {  // Down Array
+  if (event.which === 40) {  // Down Array
     movePlayer(playerPos - 9, -32, 0);
     player.addClass('player--look-down');
     playerOrientation = 'down';
   }
 
-  if ( event.which === 90 ) {  // Attack Z Array
+  if (event.which === 90) {  // Attack Z Array
     attackMain();
   }
+});
 
+$('.shield-toggle').on('mousedown', function() {
+  toggleShield(true);
+});
+
+$('.shield-toggle').on('mouseup', function() {
+  toggleShield(false);
 });
 ;function createMap() {
 
@@ -413,6 +433,8 @@ function showHitMarker() {
   tileSets.push(lastTileSet);
 
   playerPos = 22;
+
+  // calculateLoS(playerPos);
 }
 
 function addTileArray() {
@@ -423,11 +445,44 @@ function addTileArray() {
   newTileElements.pop();
 
   var newTileElementsLength = newTileElements.length;
-
   var newTilesNumber = Math.floor(Math.random() * newTileElementsLength) + 1;
 
   $.each(newTileElements, function(key, tileArray) {
     if (tileArray.id == newTilesNumber) {
+      newTiles = tileArray.tiles;
+
+      console.log(tileIndex);
+
+      newTiles.reverse().map(function(tile) {
+        newTileElements.push('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+
+        entityCheck(tile.entity, tileIndex);
+
+        tileIndex++;
+        totalTileCount++;
+      });
+
+      tileSets.unshift(tileArray);
+      tileSets[0]['id'] = 14;
+
+      newTileElements.map(function(tile) {
+        $('.tileset').prepend(tile);
+      });
+
+      newTiles.reverse();
+
+      return false;
+    }
+  });
+}
+
+function addDoor() {
+  var tileIndex = totalTileCount;
+  var newTileElements = JSON.parse(JSON.stringify(originalTileSets));
+  var newTileElementsLength = newTileElements.length;
+
+  $.each(newTileElements, function(key, tileArray) {
+    if (tileArray.type == 'door') {
       newTiles = tileArray.tiles;
 
       console.log(tileIndex);
@@ -485,7 +540,6 @@ function addTileArray() {
           playerPos = newPlayerPos;
 
           $('.tiles').css('transform','translate('+ playerPosX +'px, '+ playerPosY +'px)');
-          $('.backdrop').css('background-position', playerPosX / 10 +'px '+ playerPosY / 10 +'px');
 
           if (tile.interaction == 2) {
             changePlayerHealthpool(-100, 'You died from Falling, be careful of holes.');
@@ -503,7 +557,17 @@ function addTileArray() {
             tile.entity = 0;
           }
 
+          if (tile.entity == 'health') {
+            changePlayerHealthpool(25, 'You healed for 25.');
+
+            $('.entity--'+ tileIndex).remove();
+
+            tile.entity = 0;
+          }
+
           takeActionMobs();
+
+          // calculateLoS(playerPos);
         }
       }
     });
@@ -529,26 +593,105 @@ function changePlayerHealthpool(healthChange, healthAlert = 'You Died.') {
     healthPool = 0;
   }
 
+  if (healthPool > 100) {
+    healthPool = 100;
+  }
+
   $('.health__bar').css('width', healthPool + '%');
 }
-;function rotateShield(event) {
-  var shield = $('.shield');
-  var offset = shield.offset();
+;function updateScore(scoreChange) {
+  score = 0;
+}
+;function toggleShield(requestedShieldState) {
+  if (requestedShieldState == true) {
+    $('.shield').addClass('shield--active');
+  } else if (requestedShieldState == false) {
+    $('.shield').removeClass('shield--active');
+  }
+}
+;function calculateLoS(lightSource) {
+  var visionRange = 8;
+  var currentTile = 0;
+  var currentRow = 1;
+  var fadeDistance = 4;
 
-  var centerX = offset.left + 32;
-  var centerY = offset.top + 32;
-  var mouseX = event.pageX;
-  var mouseY = event.pageY;
+  var initialTileIndex = totalTileCount;
 
-  var radians = Math.atan2(mouseX - centerX, mouseY - centerY);
-  var rotation = (radians * (180 / Math.PI) * -1) + 225;
-  var rotationRounded = Math.floor(rotation / 90) * 90;
+  tileSets.map(function(tileArray) {
+    tileArray = tileArray.tiles;
 
-  shield.css('transform', 'rotate('+ rotationRounded +'deg)');
+    tileArray.map(function(tile) {
+      initialTileIndex--;
+
+      $('.tile[data-tile-id="'+ initialTileIndex +'"], .entity[data-entity-id="'+ initialTileIndex +'"]').css('opacity', '0');
+    });
+  });
+
+  for (i = 0; i < visionRange; i++) {
+    currentRow = 1;
+    fadeDistance--;
+
+    for (j = 0; j < visionRange; j++) {
+      var tileIndex = totalTileCount;
+
+      tileSets.map(function(tileArray) {
+        tileArray = tileArray.tiles;
+
+        tileArray.map(function(tile) {
+          tileIndex--;
+
+          if (tileIndex == lightSource) {
+            $('.tile[data-tile-id="'+ tileIndex +'"], .entity[data-entity-id="'+ tileIndex +'"]').css('opacity', '1');
+          }
+
+          if (tileIndex == lightSource + (9 * currentRow) + i) {
+            if (currentRow < fadeDistance) {
+              $('.tile[data-tile-id="'+ tileIndex +'"], .entity[data-entity-id="'+ tileIndex +'"]').css('opacity', '1');
+            } else {
+              var targetOpacity = 1 - ((currentRow - fadeDistance) / 5);
+              $('.tile[data-tile-id="'+ tileIndex +'"], .entity[data-entity-id="'+ tileIndex +'"]').css('opacity', targetOpacity);
+            }
+
+            if (tile.interaction == 0) {
+              j = visionRange;
+            }
+          }
+        });
+      });
+
+      currentRow++;
+    }
+  }
 }
 
-$('.shield-swapper').mousemove(rotateShield);
-;var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, originalTileSets, tileSets, firstTileSet, lastTileSet, mobMap, totalTileCount;
+function checkToHideRoom(position) {
+  // Hide a room when all tiles have interaction = 0.
+
+  var tileIndex = totalTileCount;
+
+  var wallCount = 0;
+
+  tileSets.map(function(tileArray) {
+    tileArray = tileArray.tiles;
+
+    tileArray.map(function(tile) {
+      tileIndex--;
+
+      if (tileIndex > 36) {
+        if (tile.interaction == 0 && wallCount != 9) {
+          wallCount++;
+        } else if (wallCount != 9){
+          wallCount = 0;
+        }
+        if (wallCount >= 9) {
+          $('.tile[data-tile-id="'+ tileIndex +'"], .entity[data-entity-id="'+ tileIndex +'"]').css('opacity', '0.2');
+        }
+      }
+
+    });
+  });
+}
+;var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, originalTileSets, tileSets, firstTileSet, lastTileSet, mobMap, totalTileCount, score, scoreModifier;
 
 $(function() {
   $.getJSON("/js/level.json", function(json){
@@ -568,6 +711,9 @@ $(function() {
   playerOrientation = 'down';
 
   healthPool = 100;
+
+  score = 0;
+  scoreModifier = 1;
 });
 
 $(window).load(function() {

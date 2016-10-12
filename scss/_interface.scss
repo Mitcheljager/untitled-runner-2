@@ -156,11 +156,14 @@
   position: relative;
 }
 
-.shield-swapper {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
+.shield-toggle {
   position: fixed;
-  left: calc(50vw - 48px);
-  bottom: 232px;
+  right: 16px;
+  bottom: 16px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  z-index: 5;
+  padding: 8px;
 }

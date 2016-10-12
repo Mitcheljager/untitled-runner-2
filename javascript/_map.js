@@ -57,6 +57,8 @@ function createMap() {
   tileSets.push(lastTileSet);
 
   playerPos = 22;
+
+  // calculateLoS(playerPos);
 }
 
 function addTileArray() {
@@ -67,11 +69,44 @@ function addTileArray() {
   newTileElements.pop();
 
   var newTileElementsLength = newTileElements.length;
-
   var newTilesNumber = Math.floor(Math.random() * newTileElementsLength) + 1;
 
   $.each(newTileElements, function(key, tileArray) {
     if (tileArray.id == newTilesNumber) {
+      newTiles = tileArray.tiles;
+
+      console.log(tileIndex);
+
+      newTiles.reverse().map(function(tile) {
+        newTileElements.push('<div data-tile-id="'+ tileIndex +'"  class="tile tile--'+ tile.type +' tile--'+ tile.variation +'"></div>');
+
+        entityCheck(tile.entity, tileIndex);
+
+        tileIndex++;
+        totalTileCount++;
+      });
+
+      tileSets.unshift(tileArray);
+      tileSets[0]['id'] = 14;
+
+      newTileElements.map(function(tile) {
+        $('.tileset').prepend(tile);
+      });
+
+      newTiles.reverse();
+
+      return false;
+    }
+  });
+}
+
+function addDoor() {
+  var tileIndex = totalTileCount;
+  var newTileElements = JSON.parse(JSON.stringify(originalTileSets));
+  var newTileElementsLength = newTileElements.length;
+
+  $.each(newTileElements, function(key, tileArray) {
+    if (tileArray.type == 'door') {
       newTiles = tileArray.tiles;
 
       console.log(tileIndex);

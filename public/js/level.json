@@ -40,7 +40,7 @@
     {"type": "tile", "variation": "floor-left",           "interaction": "3", "entity": "spikes"},
     {"type": "tile", "variation": "regular",              "interaction": "3", "entity": "spikes"},
     {"type": "tile", "variation": "regular",              "interaction": "3", "entity": "spikes"},
-    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
+    {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "health"},
     {"type": "tile", "variation": "regular",              "interaction": "3", "entity": "spikes"},
     {"type": "tile", "variation": "floor-2",              "interaction": "1", "entity": "0"},
     {"type": "tile", "variation": "floor-right",          "interaction": "1", "entity": "0"},
@@ -202,7 +202,7 @@
   ]
 }, {
   "id": 6,
-  "type": "normal",
+  "type": "door",
   "tiles": [
     {"type": "wall", "variation": "wall-bottom-left",     "interaction": "0", "entity": "0"},
     {"type": "tile", "variation": "wall-bottom",          "interaction": "0", "entity": "0"},

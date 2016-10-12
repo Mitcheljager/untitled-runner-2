@@ -26,7 +26,7 @@
 
       <div class="inventory"></div>
 
-      <div class="shield-swapper"></div>
+      <div class="shield-toggle">Shield</div>
 
       <nav class="controls">
         <div class="controls__btn controls__btn--up">&lt;</div>

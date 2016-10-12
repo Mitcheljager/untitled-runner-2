@@ -15,6 +15,13 @@ function openDoor(tileId) {
     alertBlock('You opened a door.');
     $('.entity--'+ tileId).addClass('entity--door--open');
     $('.inventory .inventory-item').first().remove();
+
+    // for (i = 0; i < 5; i++) {
+    //   addTileArray();
+    // }
+    //
+    // addDoor();
+
     return true;
   } else {
     alertBlock('You need a key to open the door.');

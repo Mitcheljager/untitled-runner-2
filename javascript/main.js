@@ -1,4 +1,4 @@
-var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, originalTileSets, tileSets, firstTileSet, lastTileSet, mobMap, totalTileCount;
+var player, playerPosX, playerPosY, playerPos, playerOrientation, healthPool, originalTileSets, tileSets, firstTileSet, lastTileSet, mobMap, totalTileCount, score, scoreModifier;
 
 $(function() {
   $.getJSON("/js/level.json", function(json){
@@ -18,6 +18,9 @@ $(function() {
   playerOrientation = 'down';
 
   healthPool = 100;
+
+  score = 0;
+  scoreModifier = 1;
 });
 
 $(window).load(function() {

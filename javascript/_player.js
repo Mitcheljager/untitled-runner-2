@@ -29,7 +29,6 @@ function movePlayer(newPlayerPos, newPosY, newPosX) {
           playerPos = newPlayerPos;
 
           $('.tiles').css('transform','translate('+ playerPosX +'px, '+ playerPosY +'px)');
-          $('.backdrop').css('background-position', playerPosX / 10 +'px '+ playerPosY / 10 +'px');
 
           if (tile.interaction == 2) {
             changePlayerHealthpool(-100, 'You died from Falling, be careful of holes.');
@@ -47,7 +46,17 @@ function movePlayer(newPlayerPos, newPosY, newPosX) {
             tile.entity = 0;
           }
 
+          if (tile.entity == 'health') {
+            changePlayerHealthpool(25, 'You healed for 25.');
+
+            $('.entity--'+ tileIndex).remove();
+
+            tile.entity = 0;
+          }
+
           takeActionMobs();
+
+          // calculateLoS(playerPos);
         }
       }
     });
@@ -71,6 +80,10 @@ function changePlayerHealthpool(healthChange, healthAlert = 'You Died.') {
     alertBlock(healthAlert);
 
     healthPool = 0;
+  }
+
+  if (healthPool > 100) {
+    healthPool = 100;
   }
 
   $('.health__bar').css('width', healthPool + '%');

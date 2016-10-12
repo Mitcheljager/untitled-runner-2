@@ -115,6 +115,12 @@ function moveMobPosition(currentTileId, newTileId) {
 
             }
           });
+        } else if (tileIndex == playerPos) {
+          console.log('Monster Attack');
+          tile.entity = 'mob';
+
+          changePlayerHealthpool(-1, 'You died to an Enemy.');
+        } else {
         }
       }
     });
